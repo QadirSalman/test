@@ -1,9 +1,59 @@
+    Route::group(['middleware' => 'user2'], function () {
+    Route::view('/hello', 'hello2')->name('hello2');
+});
+    
+    Kerna;.php routemiddlewares
+    'user' => \App\Http\Middleware\UserMiddleware::class, //By AQS
+    
+    create middleware
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()){
             return $next($request);
         }
         abort(403);
+    }
+    
+    login
+    use Auth;
+        public function login(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if(isset($user))
+        {
+            if (isset($user->role_id) && $user->status !== "Active") {
+                session()->flash('failed', 'error, your account is not active.');
+                return back()->withInput($request->only('email', 'remember'));
+            }
+            if ($user) {
+                $role_id = $user->role_id;
+                $route = "";
+                if($role_id == 1)
+                {
+                    $route='index';
+                }
+                elseif($role_id == 2)
+                {
+                    $route='hello2';
+                }
+                else{
+                    return back()->with('error', 'Something Went Wrong');
+                }
+                if (Auth::attempt(['email' => $request->email, 'role_id' => $user->role_id, 'password' => $request->password])) {
+                    return redirect()->route($route);
+                }
+                else{
+                    return back()->with('error', 'Password Incorrect');
+                }
+            }
+        }
+        else {
+            return redirect()->route('login')->with('error', 'Ooops! Invalid Email or Password')->withInput();
+        }
+    }
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect()->route('login');
     }
     
         public function addUser(Request $request)
@@ -14,4 +64,48 @@
         $user->password = $request->password;
         $user->save();
         return response()->json(['Record Inserted Successfully']);
+    }
+    
+    $(document).ready(function(){
+
+    function users(){
+
+    //Fetch Users using AJAX Get Method
+        $.ajax({
+             url: "{{route('users_ajax_get')}}",
+             type: 'GET',
+             success: function(response) {
+                $('#tablebodyget').html('');
+                $('#tablebodyget').html(response);
+             }
+       });
+    }
+    });
+    
+    
+    multi file upload
+        public function multi_image_upload(Request $request)
+    {
+        if($request->hasFile('images'))
+        {
+            foreach($request->file('images') as $attachments)
+                {
+                    $filenameWithExt = $attachments->getClientOriginalName();
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension = $attachments->getClientOriginalExtension();
+                    $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                    $path = $attachments->move(public_path("/images/"),$fileNameToStore);
+                    $images = new Image;
+                    $images->name = $fileNameToStore;
+                    $images->save();
+                }
+                if($images->save())
+                {
+                    echo "Files Uploaded Successfully";
+                }
+                else
+                {
+                    echo "Files Not Uploaded";
+                }
+        }
     }
