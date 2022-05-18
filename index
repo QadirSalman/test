@@ -109,3 +109,53 @@
                 }
         }
     }
+    
+    
+    
+    
+    
+    <div class="modal fade show" id="modal" style="padding-right: 17px; display: block;">
+            <form action="https://peterbrownandsons.com/products/variations/update" id="form_data" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="8U3UEnaSw8i9a9manD1tL0iSZx8WkTcMgwViA4T2">                <input type="hidden" name="id" value="323" id="variation_id">
+                <input type="hidden" name="product_id" value="120" id="product_id">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1">Product Variation</h4>
+                        <button type="button" class="close close_btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group text-left">
+                                <label for="message-text" class="control-label">Select Variation</label>
+                            <select class="select2 form-control custom-select mb-2 w-100 select2-hidden-accessible" id="category_label" name="product_variation" required="" tabindex="-1" aria-hidden="true">
+                                <option value="" disabled="">Select Parent Label</option>
+                                                                                                    <option value="10" data-variation="10">10</option>
+                                                                    <option value="12" data-variation="12">12</option>
+                                                                    <option value="14" data-variation="14">14</option>
+                                                                    <option value="16" data-variation="16">16</option>
+                                                                    <option value="18" data-variation="18">18</option>
+                                                                    <option value="20" data-variation="20">20</option>
+                                                                    <option value="22" data-variation="22">22</option>
+                                                                    <option value="24" data-variation="24">24</option>
+                                                                    <option value="26" data-variation="26">26</option>
+                                                                    <option value="28" data-variation="28">28</option>
+                                                                    <option value="30" data-variation="30">30</option>
+                                                                    <option value="32" data-variation="32">32</option>
+                                                                    <option value="34" data-variation="34">34</option>
+                                                                    <option value="36" data-variation="36">36</option>
+                                                                    <option value="38" data-variation="38">38</option>
+                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-category_label-container"><span class="select2-selection__rendered" id="select2-category_label-container" title="22">22</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                             </div>
+                             <div class="form-group text-left">
+                                <label for="recipient-name" class="control-label">Quantity</label>
+                                <input type="text" class="form-control shadow-none" id="quantity" required="" name="product_quantity">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default close_btn" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success change_btn">Edit Variation</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
