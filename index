@@ -1,0 +1,17 @@
+    public function handle(Request $request, Closure $next)
+    {
+        if(Auth::user()){
+            return $next($request);
+        }
+        abort(403);
+    }
+    
+        public function addUser(Request $request)
+    {
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        return response()->json(['Record Inserted Successfully']);
+    }
